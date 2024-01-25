@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.shaded.org.bouncycastle.math.Primes.STOutput
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class DemoTest {
@@ -63,8 +64,11 @@ class DemoTest {
 
     @Test
     fun publicEndpointTest() {
+        println("Test 1")
         page?.navigate("http://localhost:8080/public")
+        println("Test 2")
         assertThat(page?.textContent("body")).isEqualTo("Hello from a public endpoint!")
+        println("Test 3")
     }
 
     @Test
