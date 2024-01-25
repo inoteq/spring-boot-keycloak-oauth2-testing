@@ -29,7 +29,7 @@ class DemoTest {
         @BeforeAll
         fun launchBrowser() {
             playwright = Playwright.create()
-            browser = playwright?.firefox()?.launch()
+            browser = playwright?.chromium()?.launch()
         }
 
         @JvmStatic

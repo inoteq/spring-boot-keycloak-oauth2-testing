@@ -20,3 +20,4 @@ tests:
   stage: test
   script:
     - ./gradlew test
+    - docker ps -a
