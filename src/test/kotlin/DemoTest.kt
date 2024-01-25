@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.junit.jupiter.Container
-import org.testcontainers.shaded.org.bouncycastle.math.Primes.STOutput
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class DemoTest {
