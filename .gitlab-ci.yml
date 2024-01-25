@@ -16,4 +16,4 @@ tests:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
   script:
-    - ./gradlew test --scan
+    - ./gradlew test --info
