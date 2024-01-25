@@ -29,12 +29,13 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers:1.19.3'
     testImplementation 'org.testcontainers:junit-jupiter:1.19.3'
     testImplementation 'com.github.dasniko:testcontainers-keycloak:3.2.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions {
-        freeCompilerArgs += '-Xjsr305=strict'
-        jvmTarget = '21'
+    compilerOptions {
+        freeCompilerArgs.addAll(['-Xjsr305=strict'])
+        kotlinOptions.jvmTarget = '21'
     }
 }
 
