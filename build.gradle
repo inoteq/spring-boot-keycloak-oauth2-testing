@@ -11,7 +11,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = '17'
 }
 
 repositories {
@@ -29,13 +29,12 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers:1.19.3'
     testImplementation 'org.testcontainers:junit-jupiter:1.19.3'
     testImplementation 'com.github.dasniko:testcontainers-keycloak:3.2.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.1'
 }
 
 tasks.withType(KotlinCompile).configureEach {
-    compilerOptions {
-        freeCompilerArgs.addAll(['-Xjsr305=strict'])
-        kotlinOptions.jvmTarget = '17'
+    kotlinOptions {
+        freeCompilerArgs += '-Xjsr305=strict'
+        jvmTarget = '17'
     }
 }
 
