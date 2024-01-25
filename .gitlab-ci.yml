@@ -2,11 +2,6 @@ before_script:
   - GRADLE_USER_HOME=$(pwd)/.gradle
   - export GRADLE_USER_HOME
 
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
-
 stages:
   - test
 
@@ -21,4 +16,4 @@ tests:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
   script:
-    - ./gradlew test
+    - gradle test
