@@ -11,10 +11,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-        vendor = JvmVendorSpec.AMAZON
-    }
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -38,7 +35,7 @@ dependencies {
 tasks.withType(KotlinCompile).configureEach {
     compilerOptions {
         freeCompilerArgs.addAll(['-Xjsr305=strict'])
-        kotlinOptions.jvmTarget = '21'
+        kotlinOptions.jvmTarget = '17'
     }
 }
 
