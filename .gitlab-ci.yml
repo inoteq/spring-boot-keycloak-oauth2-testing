@@ -2,19 +2,21 @@ before_script:
   - GRADLE_USER_HOME=$(pwd)/.gradle
   - export GRADLE_USER_HOME
 
+image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
+
+services:
+  - name: docker:dind
+    command: [ "--tls=false" ]
+
+variables:
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+
 stages:
   - test
 
 tests:
   stage: test
-  image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
-  services:
-    - name: docker:dind
-      command: [ "--tls=false" ]
-  variables:
-    DOCKER_HOST: "tcp://docker:2375"
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
-
   script:
     - ./gradlew test
