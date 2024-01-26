@@ -17,5 +17,3 @@ spring:
             scope: openid
             # default redirect URI: "{baseUrl}/login/oauth2/code/{registrationId}"
             redirect-uri: http://localhost:8080/login/oauth2/code/demo-client
-server:
-  port: 8080

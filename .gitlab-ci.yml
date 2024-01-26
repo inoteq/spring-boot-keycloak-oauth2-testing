@@ -1,8 +1,4 @@
-before_script:
-  - GRADLE_USER_HOME=$(pwd)/.gradle
-  - export GRADLE_USER_HOME
-
-image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
+image: mcr.microsoft.com/playwright/java:v1.36.0-jammy
 
 services:
   - name: docker:dind
@@ -12,6 +8,16 @@ variables:
   DOCKER_HOST: "tcp://docker:2375"
   DOCKER_TLS_CERTDIR: ""
   DOCKER_DRIVER: overlay2
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.caching=true"
+
+before_script:
+  - GRADLE_USER_HOME="$(pwd)/.gradle"
+  - export GRADLE_USER_HOME
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
 
 stages:
   - test
@@ -20,4 +26,3 @@ tests:
   stage: test
   script:
     - ./gradlew test
-    - docker ps -a
