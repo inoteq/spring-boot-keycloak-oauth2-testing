@@ -26,8 +26,10 @@ class DemoTest {
 
         @JvmStatic
         @Container
-        val container = KeycloakContainer()
-//        var keycloakContainer: KeycloakContainer? = null
+        val keycloakContainer = KeycloakContainer().apply {
+            withRealmImportFile("realm.json")
+            portBindings = listOf("8081:8080")
+        }
 
 //        @JvmStatic
 //        @BeforeAll
@@ -39,12 +41,7 @@ class DemoTest {
 //        @JvmStatic
 //        @BeforeAll
 //        fun startKeycloakServer() {
-//            keycloakContainer = KeycloakContainer().apply {
-//                // realm.json file is located in src/test/resources
-//                withRealmImportFile("realm.json")
-//                portBindings = listOf("8081:8080")
-//                start()
-//            }
+//            keycloakContainer.start()
 //        }
 
 //        @JvmStatic
