@@ -1,6 +1,5 @@
 import com.example.demo.DemoApplication
 import dasniko.testcontainers.keycloak.KeycloakContainer
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
@@ -19,7 +18,11 @@ class DemoTest {
     companion object {
         @JvmStatic
         @Container
-        private val keycloakContainer = TestKeycloakContainer()
+        private val keycloakContainer = KeycloakContainer().apply {
+            withRealmImportFile("demo-realm-realm.json")
+            portBindings = listOf("8081:8080")
+            start()
+        }
 
         @JvmStatic
         @DynamicPropertySource
