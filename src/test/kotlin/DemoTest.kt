@@ -1,5 +1,6 @@
 import com.example.demo.DemoApplication
 import dasniko.testcontainers.keycloak.KeycloakContainer
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
@@ -18,12 +19,12 @@ class DemoTest {
     companion object {
         @JvmStatic
         @Container
-        private val keycloakContainer = KeycloakContainer()
+        private val keycloakContainer = TestKeycloakContainer()
 
         @JvmStatic
         @DynamicPropertySource
         private fun registerResourceServerIssuerProperty(registry: DynamicPropertyRegistry) {
-            registry.add("spring.security.oauth2.client.provider.authenticator.issuer-uri") {
+            registry.add("spring.security.oauth2.client.provider.demo-provider.issuer-uri") {
                 keycloakContainer.authServerUrl + "/realms/demo-realm"
             }
         }
