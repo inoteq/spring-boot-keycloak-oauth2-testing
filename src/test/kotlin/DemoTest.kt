@@ -1,21 +1,14 @@
 import com.example.demo.DemoApplication
-import com.microsoft.playwright.Browser
-import com.microsoft.playwright.BrowserContext
-import com.microsoft.playwright.Page
-import com.microsoft.playwright.Playwright
 import dasniko.testcontainers.keycloak.KeycloakContainer
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@EnableAutoConfiguration(exclude = [org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration::class])
+@EnableAutoConfiguration(exclude = [SecurityAutoConfiguration::class])
 @Testcontainers
 class DemoTest {
     companion object {
