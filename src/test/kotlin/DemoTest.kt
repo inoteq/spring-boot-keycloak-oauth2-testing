@@ -4,25 +4,34 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import org.springframework.test.context.TestPropertySource
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @EnableAutoConfiguration(exclude = [SecurityAutoConfiguration::class])
+@TestPropertySource("classpath:application.yml")
 @Testcontainers
 class DemoTest {
     companion object {
+        @JvmStatic
+        @Container
+        private val keycloakContainer = KeycloakContainer()
+
+        @JvmStatic
+        @DynamicPropertySource
+        private fun registerResourceServerIssuerProperty(registry: DynamicPropertyRegistry) {
+            registry.add("spring.security.oauth2.client.provider.authenticator.issuer-uri") {
+                keycloakContainer.authServerUrl + "/realms/demo-realm"
+            }
+        }
+
 //        var playwright: Playwright? = null
 //        var browser: Browser? = null
 //        var context: BrowserContext? = null
 //        var page: Page? = null
-
-        @JvmStatic
-        @Container
-        val keycloakContainer = KeycloakContainer().apply {
-            withRealmImportFile("realm.json")
-            portBindings = listOf("8081:8080")
-        }
 
 //        @JvmStatic
 //        @BeforeAll
@@ -32,16 +41,15 @@ class DemoTest {
 //        }
 
 //        @JvmStatic
-//        @BeforeAll
-//        fun startKeycloakServer() {
-//            keycloakContainer.start()
-//        }
-
-//        @JvmStatic
 //        @AfterAll
 //        fun closeBrowser() {
 //            playwright?.close()
 //        }
+    }
+
+    @Test
+    fun contextLoads() {
+        println("Hello World!")
     }
 
 //    @BeforeEach
@@ -54,10 +62,6 @@ class DemoTest {
 //    fun closeContext() {
 //        context?.close()
 //    }
-
-    @Test
-    fun contextLoads() {
-    }
 
 //    @Test
 //    fun publicEndpointTest() {
