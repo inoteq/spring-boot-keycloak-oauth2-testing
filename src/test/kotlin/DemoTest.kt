@@ -4,7 +4,6 @@ import com.microsoft.playwright.BrowserContext
 import com.microsoft.playwright.Page
 import com.microsoft.playwright.Playwright
 import dasniko.testcontainers.keycloak.KeycloakContainer
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
@@ -13,26 +12,29 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @EnableAutoConfiguration(exclude = [org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration::class])
+@Testcontainers
 class DemoTest {
     companion object {
-        var playwright: Playwright? = null
-        var browser: Browser? = null
-        var context: BrowserContext? = null
-        var page: Page? = null
-
-//        @JvmStatic
-//        @Container
-//        var keycloakContainer: KeycloakContainer? = null
+//        var playwright: Playwright? = null
+//        var browser: Browser? = null
+//        var context: BrowserContext? = null
+//        var page: Page? = null
 
         @JvmStatic
-        @BeforeAll
-        fun launchBrowser() {
-            playwright = Playwright.create()
-            browser = playwright?.chromium()?.launch()
-        }
+        @Container
+        val container = KeycloakContainer()
+//        var keycloakContainer: KeycloakContainer? = null
+
+//        @JvmStatic
+//        @BeforeAll
+//        fun launchBrowser() {
+//            playwright = Playwright.create()
+//            browser = playwright?.chromium()?.launch()
+//        }
 
 //        @JvmStatic
 //        @BeforeAll
@@ -45,23 +47,23 @@ class DemoTest {
 //            }
 //        }
 
-        @JvmStatic
-        @AfterAll
-        fun closeBrowser() {
-            playwright?.close()
-        }
+//        @JvmStatic
+//        @AfterAll
+//        fun closeBrowser() {
+//            playwright?.close()
+//        }
     }
 
-    @BeforeEach
-    fun createContextAndPage() {
-        context = browser?.newContext()
-        page = context?.newPage()
-    }
-
-    @AfterEach
-    fun closeContext() {
-        context?.close()
-    }
+//    @BeforeEach
+//    fun createContextAndPage() {
+//        context = browser?.newContext()
+//        page = context?.newPage()
+//    }
+//
+//    @AfterEach
+//    fun closeContext() {
+//        context?.close()
+//    }
 
     @Test
     fun contextLoads() {
