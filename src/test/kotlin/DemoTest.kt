@@ -10,24 +10,15 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
-import org.springframework.test.context.TestPropertySource
-import org.testcontainers.junit.jupiter.Container
-import org.testcontainers.junit.jupiter.Testcontainers
 
 @SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@EnableAutoConfiguration(exclude = [SecurityAutoConfiguration::class])
-@TestPropertySource("classpath:application.yml")
-@Testcontainers
 class DemoTest {
     companion object {
         // Start a Keycloak instance with an import file for the demo realm
         @JvmStatic
-        @Container
         private val keycloakContainer = KeycloakContainer().apply {
             withRealmImportFile("realm.json")
             portBindings = listOf("8081:8080")
