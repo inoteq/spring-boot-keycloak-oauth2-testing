@@ -14,7 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 
-@SpringBootTest(classes = [DemoApplication::class], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(
+    classes = [DemoApplication::class],
+    webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
+)
 class DemoTest {
     companion object {
         // Start a Keycloak instance with an import file for the demo realm
@@ -30,7 +33,7 @@ class DemoTest {
         @DynamicPropertySource
         private fun registerResourceServerIssuerProperty(registry: DynamicPropertyRegistry) {
             registry.add("spring.security.oauth2.client.provider.demo-provider.issuer-uri") {
-                keycloakContainer.authServerUrl + "/realms/demo-realm"
+                "${keycloakContainer.authServerUrl}/realms/demo-realm"
             }
         }
 
