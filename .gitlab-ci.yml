@@ -1,4 +1,4 @@
-image: mcr.microsoft.com/playwright/java:v1.36.0-jammy
+image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
 
 services:
   - name: docker:dind
