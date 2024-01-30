@@ -30,8 +30,8 @@ dependencies {
     testImplementation("com.microsoft.playwright:playwright:1.40.0")
 }
 
-tasks.withType(KotlinCompile) {
-    kotlinOptions {
+tasks.withType(KotlinCompile).configureEach {
+    compilerOptions {
         freeCompilerArgs += '-Xjsr305=strict'
         jvmTarget = '17'
     }
